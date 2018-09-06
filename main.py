@@ -1,59 +1,52 @@
-# PyBank Challenge
+# PyPoll Challenge
 import os
 import csv
 
-csvpath = os.path.join("Resources/budget_data.csv")
+csvpath = os.path.join("Resources/election_data.csv")
 
 with open(csvpath, newline='') as csvfile:
 
     # CSV reader specifies delimiter and variable that holds contents
     csvreader = csv.reader(csvfile, delimiter=',')
     csvheader = next(csvreader, None)
+    vote_count = [0, 0, 0, 0]
+    candidates = ["Khan", "Correy", "Li", "O'Tooley"]
 
-    list_changes = []
     count = 0
-    profit = 0.00
-    calc_change = 0
-    calc_average = 0
-    months = []
-    #max_month = [csvreader[24]]
-    #min_month = [csvreader[44]]
-
     for row in csvreader:
         count += 1
-        profit += float(row [1])
-        list_changes.append(int(row[1]) - calc_change)
-        months.append(row[0])
-        calc_change = int(row [1])
+        if row[2] == "Khan":
+            vote_count[0] += 1
+        if row[2] == "Correy":
+            vote_count[1] += 1
+        if row[2] == "Li":
+            vote_count[2] += 1
+        if row[2] == "O'Tooley":
+            vote_count[3] += 1
 
-    for item in list_changes:
-        calc_average += item
+    vpercent = [round(x/count*100, 2) for x in vote_count]
 
+    print("Election Results")
+    print("--------------------------------------------")
+    print("Total Votes: " + str(count))
+    print("--------------------------------------------")
+    print(candidates[0] + " : " + str( vpercent[0]) + " (" + str(vote_count[0]) + ")")
+    print(candidates[1] + " : " + str( vpercent[1]) + " (" + str(vote_count[1]) + ")")
+    print(candidates[2] + " : " + str( vpercent[2]) + " (" + str(vote_count[2]) + ")")
+    print(candidates[3] + " : " + str( vpercent[3]) + " (" + str(vote_count[3]) + ")")
+    print("---------------------------------------------")
+    print("Winner = Khan")
 
-    average = round(calc_average/count, 2)
-    maximum = max(list_changes)
-    minimum = min(list_changes)
+    file = open("C:/Users/jnovic/Desktop/python-challenge/PyPoll/Pypol.txt", "w")
+    file.write("Election Results")
+    file.write("--------------------------------------------")
+    file.write("Total Votes: " + str(count))
+    file.write("--------------------------------------------")
+    file.write(candidates[0] + " : " + str( vpercent[0]) + " (" + str(vote_count[0]) + ")")
+    file.write(candidates[1] + " : " + str( vpercent[1]) + " (" + str(vote_count[1]) + ")")
+    file.write(candidates[2] + " : " + str( vpercent[2]) + " (" + str(vote_count[2]) + ")")
+    file.write(candidates[3] + " : " + str( vpercent[3]) + " (" + str(vote_count[3]) + ")")
+    file.write("---------------------------------------------")
+    file.write("Winner = Khan")
 
-    print(count)
-    print(profit)
-    print(maximum)
-    print(minimum)
-    print(average)
-
-    print("Financial Analysis")
-    print("------------------------------------------------")
-    print("Total Months: " + str(count))
-    print("Total: $" + str(profit))
-    print("Average Change: $" + str(average))
-    print("Greatest Increase in Profits: $" + str(maximum) + " (" + months[25] +")")
-    print("Greatest Increase in Profits: $" + str(minimum) + " (" + months[44] +")")
-
-file = open("C:/Users/jnovic/Desktop/python-challenge/PyBank/PyBank.txt", "w")
-file.write("Financial Analysis")
-file.write("------------------------------------------------")
-file.write("Total Months: " + str(count))
-file.write("Total: $" + str(profit))
-file.write("Average Change: $" + str(average))
-file.write("Greatest Increase in Profits: $" + str(maximum) + " (" + months[25] +")")
-file.write("Greatest Increase in Profits: $" + str(minimum) + " (" + months[44] +")")
-file.close()
+    file.close()
