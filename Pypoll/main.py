@@ -37,7 +37,7 @@ with open(csvpath, newline='') as csvfile:
     print("---------------------------------------------")
     print("Winner = Khan")
 
-    file = open("C:/Users/jnovic/Desktop/python-challenge/PyPoll/Pypol.txt", "w")
+    file = open("Pypol.txt", "w")
     file.write("Election Results")
     file.write("--------------------------------------------")
     file.write("Total Votes: " + str(count))

@@ -48,7 +48,7 @@ with open(csvpath, newline='') as csvfile:
     print("Greatest Increase in Profits: $" + str(maximum) + " (" + months[25] +")")
     print("Greatest Increase in Profits: $" + str(minimum) + " (" + months[44] +")")
 
-file = open("C:/Users/jnovic/Desktop/python-challenge/PyBank/PyBank.txt", "w")
+file = open("PyBank.txt", "w")
 file.write("Financial Analysis")
 file.write("------------------------------------------------")
 file.write("Total Months: " + str(count))
